@@ -1,0 +1,24 @@
+name: SuperChatRoom
+main: com.github.imdabigboss.superchatroom.SuperChatRoom
+version: 1.0
+api-version: 1.15
+
+commands:
+   shout:
+      description: Talk in the general chat without leaving your room
+      permission: superchatroom.shout
+      permission-message: You do not have permission to use this command.
+      usage: /shout <message>
+   chatroom:
+      description: Chat privately with your friends
+      permission: superchatroom.chatroom
+      permission-message: You do not have permission to use this command.
+      usage: /chatroom <join/create/leave/invite> [room/player]
+ 
+permissions:
+   superchatroom.shout:
+      description: Allows you to use the /shout command.
+      default: true
+   superchatroom.chatroom:
+      description: Allows you to use the /chatroom command.
+      default: true
