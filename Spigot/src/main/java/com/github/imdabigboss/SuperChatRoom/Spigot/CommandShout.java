@@ -1,15 +1,16 @@
-package com.github.imdabigboss.superchatroom;
+package com.github.imdabigboss.SuperChatRoom.Spigot;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import com.github.imdabigboss.SuperChatRoom.connector.*;
+
 public class CommandShout implements CommandExecutor {
 	private final Plugin plugin = SuperChatRoom.getPlugin();
 	
     // This method is called, when somebody uses our command
-    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     	if (sender instanceof Player) { //Get if executing origin is a player
     		ChatRoom chatRoom = SuperChatRoom.getChatRoom();
@@ -20,7 +21,7 @@ public class CommandShout implements CommandExecutor {
     			}
     			
     			String message = String.join(" ", args);
-    			plugin.getServer().broadcastMessage(((Player) sender).getDisplayName() + ChatColor.RESET + ": " + message);
+    			plugin.getServer().broadcastMessage("<" + ((Player) sender).getDisplayName() + ChatColor.RESET + "> " + message);
     		} else {
     			sender.sendMessage("You must be in a room to use this command!");
     		}

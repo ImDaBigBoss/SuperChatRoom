@@ -1,8 +1,11 @@
-package com.github.imdabigboss.superchatroom;
+package com.github.imdabigboss.SuperChatRoom.Spigot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.imdabigboss.SuperChatRoom.connector.*;
+
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,14 +13,11 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class CommandChatRoom implements CommandExecutor, TabExecutor {
 	private ChatRoom chatRoom = SuperChatRoom.getChatRoom();
 	private Plugin plugin = SuperChatRoom.getPlugin();
 	
     // This method is called, when somebody uses our command
-    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     	if (sender instanceof Player) { //Get if executing origin is a player
     	} else {
@@ -40,7 +40,7 @@ public class CommandChatRoom implements CommandExecutor, TabExecutor {
     			return true;
     		}
     		
-    		int out = chatRoom.createRoom(args[1], (Player) sender);
+    		int out = chatRoom.createRoom(args[1], sender.getName());
     		if (out == 1)
     			sender.sendMessage(ChatColor.RED + "There is already a room with that name!");
     		else 
@@ -55,11 +55,15 @@ public class CommandChatRoom implements CommandExecutor, TabExecutor {
     			return true;
     		}
     		
-    		int out = chatRoom.joinRoom(args[1], (Player) sender);
+    		int out = chatRoom.joinRoom(args[1], sender.getName());
     		if (out == 1)
     			sender.sendMessage(ChatColor.RED + "No existing room has that name!");
-    		else
+    		else {
+    			for (Player player : SuperChatRoom.stringsToPlayers(chatRoom.getRoomPlayers(sender.getName()))) {
+    				player.sendMessage(sender.getName() + " joined your chat room!");
+    			}
     			sender.sendMessage(ChatColor.AQUA + "You joined " + args[1] + "!");
+    		}
     	} else if (args[0].equalsIgnoreCase("leave")) {
     		if (args.length != 1) {
     			SendHelp(sender);
@@ -70,11 +74,15 @@ public class CommandChatRoom implements CommandExecutor, TabExecutor {
     			return true;
     		}
     		
-    		int out = chatRoom.leaveRoom((Player) sender);
+    		int out = chatRoom.leaveRoom(sender.getName());
     		if (out == 1)
     			sender.sendMessage(ChatColor.RED + "An error occured");
-    		else
+    		else {
+    			for (Player player : SuperChatRoom.stringsToPlayers(chatRoom.getRoomPlayers(sender.getName()))) {
+    				player.sendMessage(sender.getName() + " left your chat room!");
+    			}
     			sender.sendMessage(ChatColor.AQUA + "You left the room!");
+    		}
     	} else if (args[0].equalsIgnoreCase("invite")) {
     		if (args.length != 2) {
     			SendHelp(sender);
@@ -107,7 +115,6 @@ public class CommandChatRoom implements CommandExecutor, TabExecutor {
     	return true;
     }
     
-    @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("chatroom")) {
         	if (args.length == 1) {

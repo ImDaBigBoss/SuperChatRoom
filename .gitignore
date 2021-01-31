@@ -19,8 +19,16 @@ hs_err_pid*
 *.iml
 *.iws
 
-# Mac
+# OS Generated
 .DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/
+Desktop.ini
+
 
 # Maven
 log/

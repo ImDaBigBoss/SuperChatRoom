@@ -1,61 +1,52 @@
-package com.github.imdabigboss.superchatroom;
+package com.github.imdabigboss.SuperChatRoom.connector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.entity.Player;
-
 public class ChatRoom {	
-	public Map<String, ArrayList<Player>> chatRooms = new HashMap<String, ArrayList<Player>>();
+	public Map<String, ArrayList<String>> chatRooms = new HashMap<String, ArrayList<String>>();
 	public Map<String, String> playerRooms = new HashMap<String, String>();
 	
-	public int createRoom(String roomName, Player player) {
+	public int createRoom(String roomName, String player) {
 		if (chatRooms.containsKey(roomName))
 			return 1;
 		
-		ArrayList<Player> players = new ArrayList<Player>();
+		ArrayList<String> players = new ArrayList<String>();
 		players.add(player);
 		chatRooms.put(roomName, players);
-		setPlayerRoom(roomName, player.getName());
+		setPlayerRoom(roomName, player);
 		return 0;
 	}
 	
-	public int joinRoom(String roomName, Player player) {
+	public int joinRoom(String roomName, String player) {
 		if (!chatRooms.containsKey(roomName))
 			return 1;
 		
-		ArrayList<Player> players = chatRooms.get(roomName);
+		ArrayList<String> players = chatRooms.get(roomName);
 		players.add(player);
 		
 		chatRooms.replace(roomName, players);
-		setPlayerRoom(roomName, player.getName());
-		
-		for(Player p : players) {
-			p.sendMessage(player.getDisplayName() + " joined this chatroom!");
-		}
+		setPlayerRoom(roomName, player);
 		return 0;
 	}
 	
-	public int leaveRoom(Player player) {
-		if (!playerRooms.containsKey(player.getName()))
+	public int leaveRoom(String player) {
+		if (!playerRooms.containsKey(player))
 			return 1;
 		
-		String currentRoom = playerRooms.get(player.getName());
-		ArrayList<Player> roomplayers = chatRooms.get(currentRoom);
+		String currentRoom = playerRooms.get(player);
+		ArrayList<String> roomplayers = chatRooms.get(currentRoom);
 		roomplayers.remove(player);
 		
 		if (roomplayers.isEmpty())
 			chatRooms.remove(currentRoom);
 		else {
-			for(Player p : roomplayers) {
-				p.sendMessage(player.getDisplayName() + " left this chatroom!");
-			}
 			chatRooms.replace(currentRoom, roomplayers);
 		}
 		
-		playerRooms.remove(player.getName());
+		playerRooms.remove(player);
 		return 0;
 	}
 	
@@ -63,7 +54,7 @@ public class ChatRoom {
 		return playerRooms.containsKey(player);
 	}
 	
-	public List<Player> getRoomPlayers(String player) {
+	public List<String> getRoomPlayers(String player) {
 		return chatRooms.get(playerRooms.get(player));
 	}
 	
