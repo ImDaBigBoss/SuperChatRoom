@@ -8,6 +8,7 @@ import java.util.Map;
 public class ChatRoom {	
 	public Map<String, ArrayList<String>> chatRooms = new HashMap<String, ArrayList<String>>();
 	public Map<String, String> playerRooms = new HashMap<String, String>();
+	public Map<String, String> playerSeeGeneral = new HashMap<String, String>();
 	
 	public int createRoom(String roomName, String player) {
 		if (chatRooms.containsKey(roomName))
@@ -16,6 +17,7 @@ public class ChatRoom {
 		ArrayList<String> players = new ArrayList<String>();
 		players.add(player);
 		chatRooms.put(roomName, players);
+		playerSeeGeneral.put(player, "on");
 		setPlayerRoom(roomName, player);
 		return 0;
 	}
@@ -28,6 +30,7 @@ public class ChatRoom {
 		players.add(player);
 		
 		chatRooms.replace(roomName, players);
+		playerSeeGeneral.put(player, "on");
 		setPlayerRoom(roomName, player);
 		return 0;
 	}
@@ -47,7 +50,31 @@ public class ChatRoom {
 		}
 		
 		playerRooms.remove(player);
+		playerSeeGeneral.remove(player);
 		return 0;
+	}
+	
+	public int playerSeeGeneral(String player, String onORoff) {
+		if (!playerRooms.containsKey(player))
+			return 1;
+		
+		if (onORoff.equalsIgnoreCase("on") || onORoff.equalsIgnoreCase("off")) {
+			playerSeeGeneral.replace(player, onORoff);
+		} else
+			return 2;
+		
+		return 0;
+	}
+	
+	public boolean getPlayerSeeGeneral(String player) {
+		if (playerSeeGeneral.containsKey(player)) {
+			if (playerSeeGeneral.get(player).equalsIgnoreCase("on")) {
+				return true;
+			} else if (playerSeeGeneral.get(player).equalsIgnoreCase("off")) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean isInRoom(String player) {

@@ -25,13 +25,11 @@ public class EventListener implements Listener {
 	public void playerChat(AsyncPlayerChatEvent event){
 		Player p = event.getPlayer();
 		if (chatRoom.isInRoom(p.getName())) {
-			event.setFormat(ChatColor.BLUE + chatRoom.playerRooms.get(p.getName()) + "> " + ChatColor.RESET + p.getDisplayName() + ChatColor.RESET + ": " + event.getMessage());
+			event.setFormat(ChatColor.BLUE + chatRoom.playerRooms.get(p.getName()) + "> " + ChatColor.RESET + p.getDisplayName() + ChatColor.RESET + ": " + ChatColor.GREEN + event.getMessage());
 			
 			event.getRecipients().clear();
 			List<String> playerNames = chatRoom.getRoomPlayers(p.getName());
 			event.getRecipients().addAll(SuperChatRoom.stringsToPlayers(playerNames));
-		} else {
-			event.setFormat("<" + p.getDisplayName() + ChatColor.RESET + "> " + event.getMessage());
 		}
 	}
 }

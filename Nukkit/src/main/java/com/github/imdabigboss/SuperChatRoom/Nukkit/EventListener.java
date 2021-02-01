@@ -1,7 +1,5 @@
 package com.github.imdabigboss.SuperChatRoom.Nukkit;
 
-import java.util.List;
-
 import com.github.imdabigboss.SuperChatRoom.connector.*;
 
 import cn.nukkit.utils.TextFormat;
@@ -25,7 +23,7 @@ public class EventListener implements Listener {
         String name = e.getPlayer().getName();
     	
     	if (chatRoom.isInRoom(name)) {
-    		e.setMessage(TextFormat.BLUE + chatRoom.playerRooms.get(name) + ">" + TextFormat.RESET + " <" + name + "> " + message);
+    		e.setMessage(TextFormat.BLUE + chatRoom.playerRooms.get(name) + ">" + TextFormat.RESET + " <" + name + "> " + TextFormat.GREEN + message);
     		e.setRecipients(plugin.stringsToSet(chatRoom.getRoomPlayers(name)));
     	}
     }
