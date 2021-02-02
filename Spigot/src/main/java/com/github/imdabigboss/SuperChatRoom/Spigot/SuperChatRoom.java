@@ -1,51 +1,72 @@
 package com.github.imdabigboss.SuperChatRoom.Spigot;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import com.github.imdabigboss.SuperChatRoom.connector.*;
 
-public class SuperChatRoom extends JavaPlugin {
+public class SuperChatRoom extends JavaPlugin implements com.github.imdabigboss.SuperChatRoom.connector.SuperChatRoom {
     private static Plugin plugin;
     private static ChatRoom chatRoom;
     
-    // Fired when plugin is first enabled
     @Override
     public void onEnable() {    	
         plugin = this;
         chatRoom = new ChatRoom();
         
-        getServer().getPluginManager().registerEvents(new EventListener(), this); //Enable the listener
+        this.getCommand("chatroom").setExecutor(new CommandManager(this));
+        this.getCommand("shout").setExecutor(new CommandManager(this));
         
-        //Enable the commands
-        this.getCommand("chatroom").setExecutor(new CommandChatRoom());
-        this.getCommand("shout").setExecutor(new CommandShout());
+        getServer().getPluginManager().registerEvents(new EventListener(this), this); //Enable the listener
     }
     
-    // Fired when plugin is disabled
     @Override
     public void onDisable() {
         
     }
     
-    public static Plugin getPlugin() {
+    public Plugin getPlugin() {
         return plugin;
     }
     
-    public static ChatRoom getChatRoom() {
+    public ChatRoom getChatRoom() {
         return chatRoom;
     }
     
-    public static List<Player> stringsToPlayers(List<String> playerNames) {
+    public List<Player> stringsToPlayers(List<String> playerNames) {
+    	if (playerNames.isEmpty())
+    		return null;
+    	
     	List<Player> players = new ArrayList<Player>();
 		for (String player : playerNames) {
-			Player out = SuperChatRoom.getPlugin().getServer().getPlayer(player);
+			Player out = getPlugin().getServer().getPlayer(player);
 			if (out != null)
 				players.add(out);
 		}
 		return players;
     }
+
+	@Override
+	public void broadcastMessage(String message) {
+		getServer().broadcastMessage(message);
+	}
+
+	@Override
+	public com.github.imdabigboss.SuperChatRoom.connector.Player getPlayer(String player) {
+		return new SpigotPlayer(getServer().getPlayer(player));
+	}
+	
+	@Override
+	public Collection<com.github.imdabigboss.SuperChatRoom.connector.Player> getOnlinePlayers() {
+		Collection<com.github.imdabigboss.SuperChatRoom.connector.Player> out = new ArrayList<com.github.imdabigboss.SuperChatRoom.connector.Player>();
+		for (Player p : getServer().getOnlinePlayers()) {
+			out.add(new SpigotPlayer(p));
+		}
+		return out;
+	}
 }

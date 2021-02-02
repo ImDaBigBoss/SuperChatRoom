@@ -12,13 +12,19 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.github.imdabigboss.SuperChatRoom.connector.*;
 
 public class EventListener implements Listener {	
-	private ChatRoom chatRoom = SuperChatRoom.getChatRoom();
+	private final SuperChatRoom plugin;
+    private final ChatRoom chatRoom;
+
+    public EventListener(SuperChatRoom plugin) {
+        this.plugin = plugin;
+        this.chatRoom = plugin.getChatRoom();
+    }
 	
 	@EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) //when a player quits the game
     {
 		Player player = event.getPlayer();
-		SuperChatRoom.getChatRoom().leaveRoom(player.getName());
+		plugin.getChatRoom().leaveRoom(player.getName());
     }
 	
 	@EventHandler
@@ -29,7 +35,7 @@ public class EventListener implements Listener {
 			
 			event.getRecipients().clear();
 			List<String> playerNames = chatRoom.getRoomPlayers(p.getName());
-			event.getRecipients().addAll(SuperChatRoom.stringsToPlayers(playerNames));
+			event.getRecipients().addAll(plugin.stringsToPlayers(playerNames));
 		}
 	}
 }
