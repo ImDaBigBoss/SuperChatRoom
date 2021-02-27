@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 public enum ChatColor {
 	BLACK("0"),
@@ -17,6 +17,10 @@ public enum ChatColor {
 	LIGHT_PURPLE("d"),
 	YELLOW("e"),
 	WHITE("f"),
+	
+	OBFUSCATED("k"),
+	BOLD("l"),
+	ITALIC("o"),
 	RESET("r");
 	
 	public final String label;

@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 public interface CommandSender {
 	String getName();

@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 public class CommandShout {
 	private final SuperChatRoom plugin;
@@ -19,7 +19,7 @@ public class CommandShout {
     			}
     			
     			String message = String.join(" ", args);
-    			plugin.broadcastMessage("<" + sender.getPlayer().getDisplayName() + ChatColor.RESET + "> " + message);
+    			plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
     		} else {
     			sender.sendMessage("You must be in a room to use this command!");
     		}

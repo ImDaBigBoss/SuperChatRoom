@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 import java.util.ArrayList;
 import java.util.List;

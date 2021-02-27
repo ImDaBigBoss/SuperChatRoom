@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatRoom {	
-	public Map<String, ArrayList<String>> chatRooms = new HashMap<String, ArrayList<String>>();
-	public Map<String, String> playerRooms = new HashMap<String, String>();
+	public Map<String, ArrayList<String>> chatRooms = new HashMap<>();
+	public Map<String, String> playerRooms = new HashMap<>();
 	
 	public int createRoom(String roomName, String player) {
 		if (chatRooms.containsKey(roomName))
 			return 1;
 		
-		ArrayList<String> players = new ArrayList<String>();
+		ArrayList<String> players = new ArrayList<>();
 		players.add(player);
 		chatRooms.put(roomName, players);
 		setPlayerRoom(roomName, player);

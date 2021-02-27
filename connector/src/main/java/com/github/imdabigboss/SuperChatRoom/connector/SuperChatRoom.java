@@ -1,4 +1,4 @@
-package com.github.imdabigboss.SuperChatRoom.connector;
+package com.github.imdabigboss.superchatroom.connector;
 
 import java.util.Collection;
 
@@ -16,4 +16,6 @@ public interface SuperChatRoom {
 	Player getPlayer(String player);
 
 	Collection<Player> getOnlinePlayers();
+
+	String getChatFormat();
 }
