@@ -9,3 +9,6 @@ You can even use /shout to talk in the general chat as if you wern't in a room a
 # Where else can I see this?
 * [Nukkit](https://cloudburstmc.org/resources/superchatroom.650/)
 * [Spigot](https://www.spigotmc.org/resources/super-chat-room.88017/)
+
+# More info
+[My discord](https://discord.gg/DfqduqS)
