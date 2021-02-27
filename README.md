@@ -1,7 +1,7 @@
 # SuperChatRoom
 [![HitCount](http://hits.dwyl.com/ImDaBigBoss/SuperChatRoom.svg)](http://hits.dwyl.com/ImDaBigBoss/SuperChatRoom)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Discord](https://img.shields.io/discord/613163671870242838.svg?color=%237289da&label=discord)](https://discord.gg/ECDstm863x)
+[![Discord](https://img.shields.io/discord/770270138876166145.svg?color=%237289da&label=discord)](https://discord.gg/ECDstm863x)
 
 A simple chat room plugin that allows you to talk with friends privately!<br>
 This is a Spigot & Nukkit plugin!<br>
