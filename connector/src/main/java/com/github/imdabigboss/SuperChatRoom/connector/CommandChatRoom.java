@@ -103,7 +103,32 @@ public class CommandChatRoom {
     		
     		String name = chatRoom.playerRooms.get(sender.getName());
     		target.sendMessage(sender.getName() + " has invited you to their chatroom named " + name + " to join, enter " + ChatColor.AQUA + "/chatroom join " + name);
-    		
+		} else if (args[0].equalsIgnoreCase("general")) {
+    		if (args.length != 2) {
+				SendHelp(sender);
+				return true;
+			}
+			if (!chatRoom.isInRoom(sender.getName())) {
+				sender.sendMessage(ChatColor.RED + "You are not in a room!");
+				return true;
+			}
+
+			if (args[1].equalsIgnoreCase("show")) {
+				if (chatRoom.showGeneral.containsKey(sender.getName())) {
+					chatRoom.showGeneral.replace(sender.getName(), "show");
+				} else {
+					chatRoom.showGeneral.put(sender.getName(), "show");
+				}
+			} else if (args[1].equalsIgnoreCase("hide")) {
+				if (chatRoom.showGeneral.containsKey(sender.getName())) {
+					chatRoom.showGeneral.replace(sender.getName(), "hide");
+				} else {
+					chatRoom.showGeneral.put(sender.getName(), "hide");
+				}
+			} else {
+				SendHelp(sender);
+				return true;
+			}
     	} else {
     		SendHelp(sender);
     	}
@@ -127,5 +152,6 @@ public class CommandChatRoom {
     	sender.sendMessage(" - /chatroom join <RoomName>");
     	sender.sendMessage(" - /chatroom leave");
     	sender.sendMessage(" - /chatroom invite <player>");
+		sender.sendMessage(" - /chatroom general show/hide");
     }
 }

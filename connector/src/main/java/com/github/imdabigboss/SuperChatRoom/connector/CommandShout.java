@@ -19,7 +19,14 @@ public class CommandShout {
     			}
     			
     			String message = String.join(" ", args);
-    			plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
+    			for (Player player : plugin.getOnlinePlayers()) {
+    				if (chatRoom.showGeneral.containsKey(player.getName())) {
+						if (chatRoom.showGeneral.get(player.getName()).equalsIgnoreCase("show"))
+							plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
+					} else {
+						plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
+					}
+				}
     		} else {
     			sender.sendMessage("You must be in a room to use this command!");
     		}

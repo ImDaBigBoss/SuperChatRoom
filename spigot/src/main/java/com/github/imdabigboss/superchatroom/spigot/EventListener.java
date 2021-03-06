@@ -42,5 +42,11 @@ public class EventListener implements Listener {
 			List<String> playerNames = chatRoom.getRoomPlayers(name);
 			e.getRecipients().addAll(plugin.stringsToPlayers(playerNames));
 		}
+
+		for (String player : chatRoom.showGeneral.keySet()) {
+			if (chatRoom.showGeneral.get(player).equalsIgnoreCase("hide")) {
+				e.getRecipients().remove(player);
+			}
+		}
 	}
 }

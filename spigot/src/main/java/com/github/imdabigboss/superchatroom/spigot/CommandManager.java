@@ -41,15 +41,24 @@ public class CommandManager implements CommandExecutor, TabExecutor {
         		cmds.add("join");
         		cmds.add("leave");
         		cmds.add("invite");
+				cmds.add("general");
         		return cmds;
         	}
-        	if (args.length == 2 && args[0].equalsIgnoreCase("invite")) {
-        		ArrayList<String> cmds = new ArrayList<String>();
-        		for (com.github.imdabigboss.superchatroom.connector.Player player : plugin.getOnlinePlayers()) {
-        			cmds.add(player.getName());
-        		}
-        		return cmds;
-        	}
+        	if (args.length == 2) {
+				if (args[0].equalsIgnoreCase("invite")) {
+					ArrayList<String> cmds = new ArrayList<String>();
+
+					for (com.github.imdabigboss.superchatroom.connector.Player player : plugin.getOnlinePlayers()) {
+						cmds.add(player.getName());
+					}
+					return cmds;
+				}else if (args[0].equalsIgnoreCase("general")) {
+					ArrayList<String> cmds = new ArrayList<String>();
+					cmds.add("show");
+					cmds.add("hide");
+					return cmds;
+				}
+			}
         	
         	return new ArrayList<>();
         }

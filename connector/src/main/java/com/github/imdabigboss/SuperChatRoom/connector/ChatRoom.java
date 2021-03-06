@@ -8,6 +8,7 @@ import java.util.Map;
 public class ChatRoom {	
 	public Map<String, ArrayList<String>> chatRooms = new HashMap<>();
 	public Map<String, String> playerRooms = new HashMap<>();
+	public Map<String, String> showGeneral = new HashMap<>();
 	
 	public int createRoom(String roomName, String player) {
 		if (chatRooms.containsKey(roomName))
