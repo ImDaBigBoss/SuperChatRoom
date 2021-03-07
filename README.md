@@ -1,5 +1,4 @@
 # SuperChatRoom
-[![HitCount](http://hits.dwyl.com/ImDaBigBoss/SuperChatRoom.svg)](http://hits.dwyl.com/ImDaBigBoss/SuperChatRoom)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Discord](https://img.shields.io/discord/770270138876166145.svg?color=%237289da&label=discord)](https://discord.gg/ECDstm863x)
 
