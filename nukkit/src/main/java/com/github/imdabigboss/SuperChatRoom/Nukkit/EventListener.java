@@ -29,18 +29,18 @@ public class EventListener implements Listener {
         plugin.getChatRoom().leaveRoom(player.getName());
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onChat(PlayerChatEvent e) {
     	String message = e.getMessage();
         String name = e.getPlayer().getName();
         String displayName = e.getPlayer().getDisplayName();
     	
     	if (chatRoom.isInRoom(name)) {
-    		e.setMessage(TextFormat.BLUE + chatRoom.playerRooms.get(name) + "> " + TextFormat.RESET + Util.formatChat(displayName, message, plugin.getChatFormat()));
+            e.setCancelled(true);
+    		message = TextFormat.BLUE + chatRoom.playerRooms.get(name) + "> " + TextFormat.RESET + Util.formatChat(displayName, message, plugin.getChatFormat());
 
-    		e.getRecipients().clear();
             List<String> playerNames = chatRoom.getRoomPlayers(name);
-    		e.setRecipients(plugin.stringsToSet(playerNames));
+            plugin.messageToList(playerNames, message);
     	}
 
         for (String player : chatRoom.showGeneral.keySet()) {

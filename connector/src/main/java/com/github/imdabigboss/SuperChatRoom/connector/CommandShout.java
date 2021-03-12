@@ -19,12 +19,12 @@ public class CommandShout {
     			}
     			
     			String message = String.join(" ", args);
-    			for (Player player : plugin.getOnlinePlayers()) {
+    			for (Player player : plugin.getOnlinePlayersOnServer(sender.getPlayer())) {
     				if (chatRoom.showGeneral.containsKey(player.getName())) {
 						if (chatRoom.showGeneral.get(player.getName()).equalsIgnoreCase("show"))
-							plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
+							player.sendMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
 					} else {
-						plugin.broadcastMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
+						player.sendMessage(Util.formatChat(sender.getPlayer().getDisplayName(), message, plugin.getChatFormat(), false));
 					}
 				}
     		} else {

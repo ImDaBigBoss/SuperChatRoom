@@ -1,0 +1,4 @@
+name: SuperChatRoom
+main: com.github.imdabigboss.superchatroom.bungee.SuperChatRoom
+version: 1.1.O
+author: ImDaBigBoss

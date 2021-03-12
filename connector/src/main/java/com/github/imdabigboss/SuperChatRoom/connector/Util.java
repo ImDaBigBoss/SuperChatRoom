@@ -3,6 +3,8 @@ package com.github.imdabigboss.superchatroom.connector;
 import java.util.List;
 
 public class Util {
+    public static String platform = "";
+
     public static String formatChat(String name, String message, String chatFormat) {
         return formatChat(name, message, chatFormat, true);
     }

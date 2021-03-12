@@ -12,6 +12,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
+import net.md_5.bungee.api.chat.TextComponent;
 
 public class SuperChatRoom extends PluginBase  implements com.github.imdabigboss.superchatroom.connector.SuperChatRoom {
     private static ChatRoom chatRoom;
@@ -19,6 +20,7 @@ public class SuperChatRoom extends PluginBase  implements com.github.imdabigboss
     
     @Override
     public void onEnable() {
+		Util.platform= "nukkit";
         chatRoom = new ChatRoom();
 
 		this.saveDefaultConfig();
@@ -85,5 +87,17 @@ public class SuperChatRoom extends PluginBase  implements com.github.imdabigboss
 			out.add(new NukkitPlayer(p));
 		}
 		return out;
+	}
+	
+	@Override
+	public Collection<com.github.imdabigboss.superchatroom.connector.Player> getOnlinePlayersOnServer(com.github.imdabigboss.superchatroom.connector.Player player) {
+		return getOnlinePlayers();
+	}
+
+	@Override
+	public void messageToList(List<String> players, String message) {
+		for (String player : players) {
+			this.getServer().getPlayer(player).sendMessage(message);
+		}
 	}
 }

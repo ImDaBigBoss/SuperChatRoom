@@ -1,19 +1,18 @@
-package com.github.imdabigboss.superchatroom.spigot;
+package com.github.imdabigboss.superchatroom.bungee;
 
 import java.util.List;
 
 import com.github.imdabigboss.superchatroom.connector.ChatRoom;
-
 import com.github.imdabigboss.superchatroom.connector.Util;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.api.event.ChatEvent;
+import net.md_5.bungee.event.EventPriority;
 
-public class EventListener implements Listener {	
+public class EventListener implements Listener {
 	private final SuperChatRoom plugin;
     private final ChatRoom chatRoom;
 
@@ -23,17 +22,22 @@ public class EventListener implements Listener {
     }
 	
 	@EventHandler
-    public void onPlayerQuit(PlayerQuitEvent e) //when a player quits the game
+    public void onPlayerQuit(PlayerDisconnectEvent e) //when a player quits the game
     {
-		Player player = e.getPlayer();
+		ProxiedPlayer player = e.getPlayer();
 		plugin.getChatRoom().leaveRoom(player.getName());
     }
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void playerChat(AsyncPlayerChatEvent e){
+	public void playerChat(ChatEvent e){
 		String message = e.getMessage();
-		String name = e.getPlayer().getName();
-		String displayName = e.getPlayer().getDisplayName();
+		
+		if (message.startsWith("/"))
+			return;
+		
+		ProxiedPlayer player = (ProxiedPlayer) e.getSender();
+		String name = player.getName();
+		String displayName = player.getDisplayName();
 
 		if (chatRoom.isInRoom(name)) {
 			e.setCancelled(true);
@@ -41,12 +45,6 @@ public class EventListener implements Listener {
 
 			List<String> playerNames = chatRoom.getRoomPlayers(name);
 			plugin.messageToList(playerNames, message);
-		}
-
-		for (String player : chatRoom.showGeneral.keySet()) {
-			if (chatRoom.showGeneral.get(player).equalsIgnoreCase("hide")) {
-				e.getRecipients().remove(player);
-			}
 		}
 	}
 }

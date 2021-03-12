@@ -100,10 +100,16 @@ public class CommandChatRoom {
     			sender.sendMessage(ChatColor.RED + args[1] + " is not online!");
     			return true;
     		}
-    		
+
+			sender.sendMessage("You invited " + args[1] + " to your chatroom!");
     		String name = chatRoom.playerRooms.get(sender.getName());
     		target.sendMessage(sender.getName() + " has invited you to their chatroom named " + name + " to join, enter " + ChatColor.AQUA + "/chatroom join " + name);
 		} else if (args[0].equalsIgnoreCase("general")) {
+    		if (Util.platform == "bungee") {
+    			sender.sendMessage("This feature is currently not available on BungeeCord.");
+    			return true;
+			}
+
     		if (args.length != 2) {
 				SendHelp(sender);
 				return true;
@@ -152,6 +158,7 @@ public class CommandChatRoom {
     	sender.sendMessage(" - /chatroom join <RoomName>");
     	sender.sendMessage(" - /chatroom leave");
     	sender.sendMessage(" - /chatroom invite <player>");
-		sender.sendMessage(" - /chatroom general show/hide");
+		if (Util.platform != "bungee")
+			sender.sendMessage(" - /chatroom general show/hide");
     }
 }

@@ -16,7 +16,8 @@ public class SuperChatRoom extends JavaPlugin implements com.github.imdabigboss.
     private static String chatFormat;
     
     @Override
-    public void onEnable() {    	
+    public void onEnable() {
+		Util.platform= "spigot";
         plugin = this;
         chatRoom = new ChatRoom();
 
@@ -80,5 +81,17 @@ public class SuperChatRoom extends JavaPlugin implements com.github.imdabigboss.
 			out.add(new SpigotPlayer(p));
 		}
 		return out;
+	}
+	
+	@Override
+	public Collection<com.github.imdabigboss.superchatroom.connector.Player> getOnlinePlayersOnServer(com.github.imdabigboss.superchatroom.connector.Player player) {
+		return getOnlinePlayers();
+	}
+
+	@Override
+	public void messageToList(List<String> players, String message) {
+		for (String player : players) {
+			this.getServer().getPlayer(player).sendMessage(message);
+		}
 	}
 }
