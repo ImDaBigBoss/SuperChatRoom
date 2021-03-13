@@ -12,7 +12,6 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public class SuperChatRoom extends PluginBase  implements com.github.imdabigboss.superchatroom.connector.SuperChatRoom {
     private static ChatRoom chatRoom;

@@ -18,7 +18,7 @@
       <id>bungeecord-repo</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
-  </repositories>
+    </repositories>
   
   <dependencies>
     <dependency>
