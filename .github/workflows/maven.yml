@@ -1,6 +1,3 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Java CI with Maven
 
 on:
@@ -16,9 +13,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK 1.16
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 1.16
     - name: Build with Maven
       run: mvn package
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: "latest"
+        prerelease: false
+        title: "Latest build"
+        files: | 
+            bungee/target/SuperChatRoom-Bungee.jar
+            nukkit/target/SuperChatRoom-Nukkit.jar
+            spigot/target/SuperChatRoom-Spigot.jar
