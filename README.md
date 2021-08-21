@@ -1,5 +1,6 @@
 # SuperChatRoom
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A simple chat room plugin that allows you to talk with friends privately!<br>
 This is a Bungee Cord, Spigot & Nukkit plugin!<br>
 

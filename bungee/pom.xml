@@ -29,13 +29,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>net.md-5</groupId>
-      <artifactId>bungeecord-api</artifactId>
-      <version>1.16-R0.5-SNAPSHOT</version>
-      <type>javadoc</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>com.github.imdabigboss.superchatroom</groupId>
       <artifactId>connector</artifactId>
       <version>1.0</version>
@@ -44,9 +37,9 @@
   </dependencies>
   
   <build>
-  	<finalName>SuperChatRoom-Bungee</finalName>
-  	<plugins>
-  	  <plugin>
+    <finalName>SuperChatRoom-Bungee</finalName>
+    <plugins>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.1</version>
@@ -59,7 +52,7 @@
           </execution>
         </executions>
       </plugin>
-  	</plugins>
+    </plugins>
   </build>
   
   <properties>
