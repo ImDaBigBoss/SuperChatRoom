@@ -28,8 +28,20 @@
   </build>
   <repositories>
     <repository>
-      <id>nukkitx-repo</id>
-      <url>http://repo.nukkitx.com/maven-snapshots/</url>
+      <releases />
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>opencollab-repo-release</id>
+      <url>https://repo.opencollab.dev/maven-releases/</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots />
+      <id>opencollab-repo-snapshot</id>
+      <url>https://repo.opencollab.dev/maven-snapshots/</url>
     </repository>
   </repositories>
   <dependencies>
