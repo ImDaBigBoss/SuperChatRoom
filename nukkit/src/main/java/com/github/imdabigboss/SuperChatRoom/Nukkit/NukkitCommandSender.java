@@ -1,38 +1,39 @@
 package com.github.imdabigboss.superchatroom.nukkit;
 
-import com.github.imdabigboss.superchatroom.connector.Player;
-
+import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
+import com.github.imdabigboss.superchatroom.connector.ConnectorPlayer;
 
 public class NukkitCommandSender implements com.github.imdabigboss.superchatroom.connector.CommandSender {
-	private final CommandSender handle;
-	
-	public NukkitCommandSender(CommandSender handle) {
+    private final CommandSender handle;
+
+    public NukkitCommandSender(CommandSender handle) {
         this.handle = handle;
     }
-	
-	@Override
-	public Player getPlayer() {
-		if (isConsole())
-			return null;
-		
-		return new NukkitPlayer((cn.nukkit.Player) handle);
-	}
-	
-	@Override
-	public String getName() {
-		return handle.getName();
-	}
 
-	@Override
-	public void sendMessage(String message) {
-		handle.sendMessage(message);
-	}
+    @Override
+    public ConnectorPlayer getPlayer() {
+        if (this.isConsole()) {
+            return null;
+        }
 
-	@Override
-	public boolean isConsole() {
-		return handle instanceof ConsoleCommandSender;
-	}
-	
+        return new NukkitPlayer((Player) handle);
+    }
+
+    @Override
+    public String getName() {
+        return handle.getName();
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        handle.sendMessage(message);
+    }
+
+    @Override
+    public boolean isConsole() {
+        return handle instanceof ConsoleCommandSender;
+    }
+
 }

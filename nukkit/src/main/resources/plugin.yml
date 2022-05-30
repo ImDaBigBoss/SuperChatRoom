@@ -1,27 +1,27 @@
 name: SuperChatRoom
 main: com.github.imdabigboss.superchatroom.nukkit.SuperChatRoom
 version: "1.1.0"
-api: ["1.0.5"]
+api: [ "1.0.5" ]
 load: POSTWORLD
 author: ImDaBigBoss
-authors: []
+authors: [ ]
 description: A simple chat room plugin that allows you to talk with friends privately!
 website: https://github.com/ImDaBigBoss/SuperChatRoom
-softdepend: []
+softdepend: [ ]
 prefix: "SuperChatRoom"
-loadbefore: []
+loadbefore: [ ]
 
 commands:
   chatroom:
     description: Chat privately with your friends
     usage: "/chatroom <join/create/leave/invite> [room/player]"
-    aliases: []
+    aliases: [ ]
     permission: superchatroom.chatroom
     permission-message: "You do not have permission to use this command."
   shout:
     description: Talk in the general chat without leaving your room
     usage: "/shout <message>"
-    aliases: []
+    aliases: [ ]
     permission: superchatroom.shout
     permission-message: "You do not have permission to use this command."
 

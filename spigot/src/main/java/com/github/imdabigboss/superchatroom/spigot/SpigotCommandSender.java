@@ -1,26 +1,27 @@
 package com.github.imdabigboss.superchatroom.spigot;
 
+import com.github.imdabigboss.superchatroom.connector.ConnectorPlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-
-import com.github.imdabigboss.superchatroom.connector.Player;
+import org.bukkit.entity.Player;
 
 public class SpigotCommandSender implements com.github.imdabigboss.superchatroom.connector.CommandSender {
-	private final CommandSender handle;
-	
-	public SpigotCommandSender(CommandSender handle) {
+    private final CommandSender handle;
+
+    public SpigotCommandSender(CommandSender handle) {
         this.handle = handle;
     }
-	
-	@Override
-	public Player getPlayer() {
-		if (isConsole())
-			return null;
-		
-		return new SpigotPlayer((org.bukkit.entity.Player) handle);
-	}
-	
-	@Override
+
+    @Override
+    public ConnectorPlayer getPlayer() {
+        if (this.isConsole()) {
+            return null;
+        }
+
+        return new SpigotPlayer((Player) handle);
+    }
+
+    @Override
     public void sendMessage(String message) {
         handle.sendMessage(message);
     }
@@ -29,7 +30,7 @@ public class SpigotCommandSender implements com.github.imdabigboss.superchatroom
     public boolean isConsole() {
         return handle instanceof ConsoleCommandSender;
     }
-    
+
     @Override
     public String getName() {
         return handle.getName();
